@@ -1,0 +1,3 @@
+[submodule "root/opt/playbook/cloud_hosts"]
+	path = root/opt/playbook/cloud_hosts
+	url = https://github.com/svensp/cloud_hosts.git

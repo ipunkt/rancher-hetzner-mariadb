@@ -1,0 +1,80 @@
+---
+- hosts: "{{ lookup('env', 'SERVER1') }}:{{ lookup('env', 'SERVER2') }}`"
+  vars:
+    ansible_ssh_private_key_file: "/data/id_rsa"
+  pre_tasks:
+    - apt:
+        update_cache: yes
+  roles:
+    - role: cluster
+      cluser_user_password: "{{ lookup('env', 'CLUSTER_USER_PASSWORD') }}"
+      clustername: mysql
+      ini_file: /data/cluster.ini
+    - role: hetzner_cloud_stonith
+      api_token: "{{ lookup('env', 'HCLOUD_TOKEN') }}"
+      disable_stonith: false
+    - role: cloud_floating_ip
+      api_token: "{{ lookup('env', 'HCLOUD_TOKEN') }}"
+      floating_ip: "{{ hostvars.localhost.created_floating_ip.ip }}"
+      permanent: true
+      ip_name: 'mysql'
+      ip_nic: "{{ ansible_default_ipv4.interface }}"
+    - role: drbd
+      resource_level_fencing: true
+      drbd_group: mysql
+      devices:
+        - name: mysql
+          disk_device: /dev/vg0/mysql
+          drbd_device: /dev/drbd_mysql
+          port: 7788
+          minor: 0
+          format: ext4
+        - name: files
+          disk_device: /dev/vg0/files
+          drbd_device: /dev/drbd_files
+          port: 7790
+          minor: 1
+          format: ext4
+    - role: cluster_drbd
+      devices:
+        - name: mysql
+          dev: drbd_mysql
+          mnt: /mnt/mysql
+          conf: /etc/drbd.d/mysql.res
+          drbd_name: mysql
+          format: ext4
+          colocation_ip: "{{ lookup('env', 'FLOATING_IP') }}"
+        - name: files
+          dev: drbd_files
+          mnt: /mnt/files
+          conf: /etc/drbd.d/files.res
+          drbd_name: files
+          format: ext4
+          colocation_ip:  "{{ lookup('env', 'FLOATING_IP') }}"
+    - role: mariadb
+      innodb_buffer_pool_size: 1G
+      innodb_log_file_size: 512M
+      data_path: /mnt/mysql
+      bind_address: "{{ hostvars.localhost.created_floating_ip.ip }}"
+    - role: mariadb_cluster
+      constraint_service: mysql-master
+      databases:
+        - name: rancher_db
+          encoding: utf8
+      users:
+        - name: rancher
+          password: MGWRn99bKrDkeZ3Y
+          host: "%"
+          privileges:
+            - table: rancher_db.*
+              privileges: 
+                - ALL
+    - role: mysql_backup
+      plugin: scp
+      log: 4
+      datadir: "/mnt/mysql"
+      database_connect: "--socket=/var/lib/mysqld/mysqld.sock"
+      sftp_user: u178365
+      sftp_server: "u178365.your-storagebox.de"
+      sftp_root_directory: "mysql-backups"
+    - role: mysql_backup_cluster

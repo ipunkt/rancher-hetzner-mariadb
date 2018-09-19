@@ -1,0 +1,13 @@
+- hosts: "{{ lookup('env', 'SERVER1') }}:{{ lookup('env', 'SERVER2') }}`"
+  vars:
+    ansible_ssh_private_key_file: "/data/id_rsa"
+  roles:
+    - role: rancher_external
+      external_stack: "{{ lookup('env', 'EXTERNAL_STACK')}}"
+      external_name: "{{ lookup('env', 'EXTERNAL_NAME')}}"
+      external_ips: 
+      - "{{ lookup('env', 'EXTERNAL_IP')}}"
+      rancher:
+        url: "{{ lookup('env', 'CATTLE_URL')}}"
+        access_key: "{{ lookup('env', 'CATTLE_ACCESS_KEY')}}"
+        secret_key: "{{ lookup('env', 'CATTLE_SECRET_KEY')}}"
