@@ -1,4 +1,6 @@
-if [ - "${HCLOUD_TOKEN}" ] ; then
+#!/bin/sh
+
+if [ -z "${HCLOUD_TOKEN}" ] ; then
 	echo "HCLOUD_TOKEN missing!"
 	echo
 	echo "Please set it to a hetzner cloud api token for the enviornment the server"
