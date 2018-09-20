@@ -32,7 +32,7 @@
       ssh_keys:
       - mysql_key
     when: item.changed
-    loop: {{ create_servers.results }}
+    loop: "{{ create_servers.results }}"
   - name: Refresh inventory with new servers
     meta: refresh_inventory
   - name: Wait for a few seconds for the new servers to start ssh
