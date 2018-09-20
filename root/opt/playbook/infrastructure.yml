@@ -27,12 +27,12 @@
       - "{{ lookup('env', 'SERVER2') }}"
   - name: Set newly created servers into rescue mode
     hcloud_server:
-      name: "{{ item }}"
+      name: "{{ item.item }}"
       rescue: linux64
       ssh_keys:
       - mysql_key
     when: item.changed
-    loop: {{ create_servers.results|flatten }}
+    loop: {{ create_servers.results }}
   - name: Refresh inventory with new servers
     meta: refresh_inventory
   - name: Wait for a few seconds for the new servers to start ssh
