@@ -11,5 +11,5 @@
     - role: logical_volumes
       group: vg0
       volumes:
-        name: mysql
-        size: 100%FREE
+        - name: files
+          size: 100%FREE
