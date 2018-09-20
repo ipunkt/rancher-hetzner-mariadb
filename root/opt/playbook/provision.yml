@@ -9,7 +9,7 @@
         fs: ext4
         size: 10G
     - role: logical_volumes
+      group: vg0
       volumes:
-        group: vg0
         name: mysql
       size: 100%FREE
