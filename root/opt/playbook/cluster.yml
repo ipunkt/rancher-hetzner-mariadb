@@ -58,23 +58,22 @@
       bind_address: "{{ hostvars.localhost.created_floating_ip.ip }}"
     - role: mariadb_cluster
       constraint_service: mysql-master
-      databases:
-        - name: rancher_db
-          encoding: utf8
+      databases: []
       users:
-        - name: rancher
-          password: MGWRn99bKrDkeZ3Y
+        - name: "{{ lookup('env', 'ADMIN_USERNAME') }}"
+          password: "{{ lookup('env', 'ADMIN_PASSWORD') }}"
           host: "%"
           privileges:
-            - table: rancher_db.*
+            - table: '*.*'
               privileges: 
                 - ALL
+                - GRANT
     - role: mysql_backup
       plugin: scp
       log: 4
       datadir: "/mnt/mysql"
       database_connect: "--socket=/var/lib/mysqld/mysqld.sock"
-      sftp_user: u178365
-      sftp_server: "u178365.your-storagebox.de"
-      sftp_root_directory: "mysql-backups"
+      sftp_user: "{{ lookup('env', 'BACKUP_USER') }}"
+      sftp_server: "{{ lookup('env', 'BACKUP_URL') }}"
+      sftp_root_directory: "{{ lookup('env', 'BACKUP_PATH') }}"
     - role: mysql_backup_cluster

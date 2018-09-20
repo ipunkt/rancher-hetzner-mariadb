@@ -27,10 +27,17 @@ init() {
 	SERVER1=${SERVER1:-mysql01}
 	SERVER2=${SERVER1:-mysql02}
 
-	SERVER_TYPE=${SERVER_TYPE:-cx21}
-	SERVER_LOCATION=${SERVER_LOCATION:-fsn1}
-	EXTERNAL_STACK=${EXTERNAL_STACK:-Database}
-	EXTERNAL_NAME=${EXTERNAL_NAME:-mysql}
+	SERVER_TYPE="${SERVER_TYPE:-cx21}"
+	SERVER_LOCATION="${SERVER_LOCATION:-fsn1}"
+	EXTERNAL_STACK="${EXTERNAL_STACK:-Database}"
+	EXTERNAL_NAME="${EXTERNAL_NAME:-mysql}"
+
+	ADMIN_USERNAME="${ADMIN_USERNAME:-admin}"
+	# Environment variable ADMIN_PASSWORD has no default
+
+	BACKUP="${BACKUP:-true}"
+	# Environment variable BACKUP_URL has no default
+	# Environment variable BACKUP_KEY has no default
 
 	FLOATING_IP="${FLOATING_IP:-mysql}"
 
