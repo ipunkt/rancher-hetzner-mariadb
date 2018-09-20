@@ -30,26 +30,26 @@ start() {
 }
 
 init() {
-	SERVER1=${SERVER1:-mysql01}
-	SERVER2=${SERVER1:-mysql02}
+	export SERVER1=${SERVER1:-mysql01}
+	export SERVER2=${SERVER2:-mysql02}
 
-	SERVER_TYPE="${SERVER_TYPE:-cx21}"
-	SERVER_LOCATION="${SERVER_LOCATION:-fsn1}"
-	EXTERNAL_STACK="${EXTERNAL_STACK:-Database}"
-	EXTERNAL_NAME="${EXTERNAL_NAME:-mysql}"
+	export SERVER_TYPE="${SERVER_TYPE:-cx21}"
+	export SERVER_LOCATION="${SERVER_LOCATION:-fsn1}"
+	export EXTERNAL_STACK="${EXTERNAL_STACK:-Database}"
+	export EXTERNAL_NAME="${EXTERNAL_NAME:-mysql}"
 
-	ADMIN_USERNAME="${ADMIN_USERNAME:-admin}"
+	export ADMIN_USERNAME="${ADMIN_USERNAME:-admin}"
 	# Environment variable ADMIN_PASSWORD has no default
 
-	BACKUP="${BACKUP:-true}"
+	export BACKUP="${BACKUP:-true}"
 	# Environment variable BACKUP_URL has no default
 	# Environment variable BACKUP_KEY has no default
 
-	FLOATING_IP="${FLOATING_IP:-mysql}"
+	export FLOATING_IP="${FLOATING_IP:-mysql}"
 
-	SSH_KEY_NAME="${SSH_KEY_NAME:-mysql_key}"
-	SSH_KEY_PATH="${SSH_KEY_PATH:-./id_rsa}"
-	CLUSTER_INI="${CLUSTER_INI:-./cluster.ini}"
+	export SSH_KEY_NAME="${SSH_KEY_NAME:-mysql_key}"
+	export SSH_KEY_PATH="${SSH_KEY_PATH:-./id_rsa}"
+	export CLUSTER_INI="${CLUSTER_INI:-./cluster.ini}"
 }
 
 init
