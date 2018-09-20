@@ -24,7 +24,6 @@
       drbd_hosts:
         - "{{ lookup('env', 'SERVER1') }}"
         - "{{ lookup('env', 'SERVER2') }}"
-        mysql
       devices:
         - name: mysql
           disk_device: /dev/vg0/mysql
@@ -48,8 +47,7 @@
           format: ext4
           colocation_ip: "{{ lookup('env', 'FLOATING_IP') }}"
     - role: mariadb
-      innodb_buffer_pool_size: "{{ lookup('ini', lookup('env', 'SERVER_TYPE')+' section=innodb_buffer_pool_size file=server_types.ini') }}"1G
-      innodb_log_file_size: 512M
+      innodb_buffer_pool_size: "{{ lookup('ini', lookup('env', 'SERVER_TYPE')+' section=innodb_buffer_pool_size file=server_types.ini') }}"1G innodb_log_file_size: 512M
       data_path: /mnt/mysql
       bind_address: "{{ hostvars.localhost.created_floating_ip.ip }}"
     - role: mariadb_cluster
