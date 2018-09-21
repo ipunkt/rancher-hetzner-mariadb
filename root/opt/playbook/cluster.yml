@@ -52,7 +52,6 @@
       data_path: /mnt/mysql
       bind_address: "{{ hostvars.localhost.created_floating_ip.ip }}"
     - role: mariadb_cluster
-      key_directory: .
       constraint_service: mysql-master
       databases: []
       users:
@@ -65,6 +64,7 @@
                 - ALL
                 - GRANT
     - role: mysql_backup
+      key_directory: .
       plugin: scp
       log: 4
       datadir: "/mnt/mysql"
