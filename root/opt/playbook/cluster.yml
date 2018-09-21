@@ -16,8 +16,8 @@
     - role: cloud_floating_ip
       api_token: "{{ lookup('env', 'HCLOUD_TOKEN') }}"
       floating_ip: "{{ hostvars.localhost.created_floating_ip.ip }}"
-      permanent: true
-      ip_name: 'mysql'
+      permanent: false
+      ip_name: "{{ lookup('env', 'FLOATING_IP') }}"
       ip_nic: "{{ ansible_default_ipv4.interface }}"
     - role: drbd
       resource_level_fencing: true
