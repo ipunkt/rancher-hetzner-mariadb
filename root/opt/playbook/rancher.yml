@@ -7,7 +7,7 @@
       stack_name: "{{ lookup('env', 'EXTERNAL_STACK')}}"
       external_name: "{{ lookup('env', 'EXTERNAL_NAME')}}"
       external_ips: 
-      - "{{ lookup('env', 'EXTERNAL_IP')}}"
+      - "{{ hostvars.localhost.created_floating_ip.ip }}"
       rancher:
         url: "{{ lookup('env', 'CATTLE_URL')}}"
         access_key: "{{ lookup('env', 'CATTLE_ACCESS_KEY')}}"
