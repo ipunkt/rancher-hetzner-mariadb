@@ -5,6 +5,11 @@
   pre_tasks:
     - apt:
         update_cache: yes
+    - name: Create files/mysql
+      copy:
+        content: "{{ lookup('env', 'BACKUP_KEY') }}"
+        path: "./key"
+      delegate_to: localhost
   roles:
     - role: cluster
       cluser_user_password: "{{ lookup('env', 'CLUSTER_USER_PASSWORD') }}"
@@ -46,6 +51,7 @@
       data_path: /mnt/mysql
       bind_address: "{{ hostvars.localhost.created_floating_ip.ip }}"
     - role: mariadb_cluster
+      key_directory: .
       constraint_service: mysql-master
       databases: []
       users:
@@ -63,6 +69,6 @@
       datadir: "/mnt/mysql"
       database_connect: "--socket=/var/lib/mysqld/mysqld.sock"
       sftp_user: "{{ lookup('env', 'BACKUP_USER') }}"
-      sftp_server: "{{ lookup('env', 'BACKUP_URL') }}"
+      sftp_server: "sftp://{{ lookup('env', 'BACKUP_SERVER') }}"
       sftp_root_directory: "{{ lookup('env', 'BACKUP_PATH') }}"
     - role: mysql_backup_cluster

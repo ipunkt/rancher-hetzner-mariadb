@@ -42,7 +42,9 @@ init() {
 	# Environment variable ADMIN_PASSWORD has no default
 
 	export BACKUP="${BACKUP:-true}"
-	# Environment variable BACKUP_URL has no default
+	export BACKUP="${BACKUP_USER:-backup}"
+	export BACKUP_PATH="${BACKUP_PATH:-/backup}"
+	# Environment variable BACKUP_SERVER has no default
 	# Environment variable BACKUP_KEY has no default
 
 	export FLOATING_IP="${FLOATING_IP:-mysql}"
