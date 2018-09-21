@@ -47,7 +47,7 @@
           format: ext4
           colocation_ip: "{{ lookup('env', 'FLOATING_IP') }}"
     - role: mariadb
-      innodb_buffer_pool_size: "{{ 'innodb_buffer_pool_size  section='~lookup('ini', lookup('env', 'SERVER_TYPE')~' file=server_types.ini') }}"
+      innodb_buffer_pool_size: "{{ lookup('env','innodb_buffer_pool_size  section='~lookup('ini', lookup('env', 'SERVER_TYPE')~' file=server_types.ini') }}"
       innodb_log_file_size: 512M
       data_path: /mnt/mysql
       bind_address: "{{ hostvars.localhost.created_floating_ip.ip }}"
