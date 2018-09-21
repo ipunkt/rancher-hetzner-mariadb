@@ -8,7 +8,7 @@
     - name: Create files/mysql
       copy:
         content: "{{ lookup('env', 'BACKUP_KEY') }}"
-        path: "./key"
+        dest: "./key"
       delegate_to: localhost
   roles:
     - role: cluster
