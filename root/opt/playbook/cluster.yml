@@ -31,12 +31,6 @@
           port: 7788
           minor: 0
           format: ext4
-        - name: files
-          disk_device: /dev/vg0/files
-          drbd_device: /dev/drbd_files
-          port: 7790
-          minor: 1
-          format: ext4
     - role: cluster_drbd
       devices:
         - name: mysql
