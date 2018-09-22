@@ -10,5 +10,5 @@
       - "{{ hostvars.localhost.created_floating_ip.ip }}"
       rancher:
         url: "{{ lookup('env', 'CATTLE_URL')}}"
-        access_key: "{{ lookup('env', 'CATTLE_ACCESS_KEY')}}"
-        secret_key: "{{ lookup('env', 'CATTLE_SECRET_KEY')}}"
+        access_key: "{{ lookup('env', 'CATTLE_ENVIRONMENT_ADMIN_ACCESS_KEY')}}"
+        secret_key: "{{ lookup('env', 'CATTLE_ENVIRONMENT_ADMIN_SECRET_KEY')}}"
