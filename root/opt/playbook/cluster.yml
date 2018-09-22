@@ -70,6 +70,6 @@
       datadir: "/mnt/mysql"
       database_connect: "--socket=/var/lib/mysqld/mysqld.sock"
       sftp_user: "{{ lookup('env', 'BACKUP_USER') }}"
-      sftp_server: "sftp://{{ lookup('env', 'BACKUP_SERVER') }}"
+      sftp_server: "{{ lookup('env', 'BACKUP_SERVER') }}"
       sftp_root_directory: "{{ lookup('env', 'BACKUP_PATH') }}"
     - role: mysql_backup_cluster
