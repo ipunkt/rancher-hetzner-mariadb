@@ -23,7 +23,7 @@ start() {
 
 	cd /opt/playbook
 	if [ "${BACKUP}" != "true" ] ; then
-		while ! ansible-playbook install.yml --skip-tags mysql_backup,mysql_backup_cluster
+		while ! ansible-playbook install.yml --skip-tags "mysql-backup,mysql_backup_cluster"
 		do sleep 1s
 		done
 	else
