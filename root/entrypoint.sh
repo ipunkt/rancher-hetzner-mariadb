@@ -46,7 +46,7 @@ init() {
 	# Environment variable ADMIN_PASSWORD has no default
 
 	export BACKUP="${BACKUP:-true}"
-	export BACKUP="${BACKUP_USER:-backup}"
+	export BACKUP_USER="${BACKUP_USER:-backup}"
 	export BACKUP_PATH="${BACKUP_PATH:-/backup}"
 	# Environment variable BACKUP_SERVER has no default
 	# Environment variable BACKUP_KEY has no default
