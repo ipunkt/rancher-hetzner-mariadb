@@ -73,3 +73,6 @@
       sftp_server: "{{ lookup('env', 'BACKUP_SERVER') }}"
       sftp_root_directory: "{{ lookup('env', 'BACKUP_PATH') }}"
     - role: mysql_backup_cluster
+      resource:
+        name: mysql-backup
+        parent: mysql-server
