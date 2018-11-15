@@ -65,6 +65,7 @@
                 - ALL
                 - GRANT
     - role: mysql_backup
+      version: "{{ lookup('env', 'MARIADB_VERSION') }}"
       key_directory: .
       plugin: scp
       log: 4
