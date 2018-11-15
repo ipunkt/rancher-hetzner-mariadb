@@ -47,6 +47,7 @@
           format: ext4
           colocation_ip: "{{ lookup('env', 'FLOATING_IP') }}"
     - role: mariadb
+      version: "{{ lookup('env', 'MARIADB_VERSION') }}"
       innodb_buffer_pool_size: "{{ lookup('ini','innodb_buffer_pool_size  section='~lookup('env', 'SERVER_TYPE')~' file=server_types.ini') }}"
       innodb_log_file_size: 512M
       data_path: /mnt/mysql
@@ -60,7 +61,7 @@
           host: "%"
           privileges:
             - table: '*.*'
-              privileges: 
+              privileges:
                 - ALL
                 - GRANT
     - role: mysql_backup

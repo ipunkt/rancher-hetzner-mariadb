@@ -42,6 +42,7 @@ init() {
 	export EXTERNAL_STACK="${EXTERNAL_STACK:-Database}"
 	export EXTERNAL_NAME="${EXTERNAL_NAME:-mysql}"
 
+	export MARIADB_VERSION="${MARIADB_VERSION:-distribution}"
 	export ADMIN_USERNAME="${ADMIN_USERNAME:-admin}"
 	# Environment variable ADMIN_PASSWORD has no default
 
