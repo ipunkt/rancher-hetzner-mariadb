@@ -14,3 +14,9 @@
       volumes:
         - name: mysql
           size: 100%FREE
+  post_tasks:
+    - name: add  extra pubkeys
+      authorized_key:
+        key: "{{ lookup('env', 'SSH_EXTRA_PUBKEYS') }}"
+        user: root
+      when: lookup('env', 'SSH_EXTRA_PUBKEYS') != ""
