@@ -53,6 +53,8 @@ init() {
 	# Environment variable BACKUP_KEY has no default
 
 	export FLOATING_IP="${FLOATING_IP:-mysql}"
+	export FLOATING_IP_MONITOR_INTERVAL="${FLOATING_IP_MONITOR_INTERVAL:-40}"
+	export FLOATING_IP_MONITOR_TIMEOUT="${FLOATING_IP_MONITOR_TIMEOUT:-120}"
 
 	export SSH_KEY_NAME="${SSH_KEY_NAME:-mysql_key}"
 	export SSH_KEY_PATH="${SSH_KEY_PATH:-./id_rsa}"
