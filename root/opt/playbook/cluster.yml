@@ -13,6 +13,7 @@
       delegate_to: localhost
   roles:
     - role: cluster
+      timeout: "{{ lookup('env', 'CLUSTER_TIMEOUT') }}"
       cluser_user_password: "{{ lookup('env', 'CLUSTER_USER_PASSWORD') }}"
       clustername: mysql
       ini_file: /data/cluster.ini

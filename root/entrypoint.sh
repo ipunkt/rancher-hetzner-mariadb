@@ -59,6 +59,7 @@ init() {
 	export SSH_KEY_NAME="${SSH_KEY_NAME:-mysql_key}"
 	export SSH_KEY_PATH="${SSH_KEY_PATH:-./id_rsa}"
 	export CLUSTER_INI="${CLUSTER_INI:-./cluster.ini}"
+	export CLUSTER_TIMEOUT="${CLUSTER_TIMEOUT:-10000}"
 
 	export SSH_EXTRA_PUBKEYS="${SSH_EXTRA_PUBKEYS}"
 }
