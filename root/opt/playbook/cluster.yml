@@ -50,6 +50,7 @@
           format: ext4
           colocation_ip: "{{ lookup('env', 'FLOATING_IP') }}"
     - role: mariadb
+      sql_mode: "{{ lookup('env', 'SQL_MODE') }}"
       version: "{{ lookup('env', 'MARIADB_VERSION') }}"
       innodb_buffer_pool_size: "{{ lookup('ini','innodb_buffer_pool_size  section='~lookup('env', 'SERVER_TYPE')~' file=server_types.ini') }}"
       innodb_log_file_size: 512M
